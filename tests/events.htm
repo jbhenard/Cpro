@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="keywords" content="jQuery Calendar, jqxCalendar" />
+    <meta name="description" content="This demo demonstrates how to trigger the jqxCalendar's valuechanged
+        and nextButtonClick and backButtonClick events." />
+    <title id='Description'>This demo demonstrates how to trigger the jqxCalendar's valuechanged
+        and nextButtonClick and backButtonClick events.</title>
+       
+    <link rel="stylesheet" href="http://cpro.jbh/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+    <link rel="stylesheet" href="http://cpro.jbh/jqwidgets/jqwidgets/styles/jqx.classic.css" type="text/css" />
+
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.edit.js"></script>  
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/scripts/demos.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/demos/jqxgrid/generatedata.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxexpander.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdragdrop.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/tests/generatedata.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+    
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Create jqxDateTimeInput
+            $("#jqxDateTimeInput").jqxDateTimeInput({ width: '270px', height: '25px'});
+
+            $('#Events').css('border', 'none');
+            $('#Events').jqxPanel({  height: '250px', width: '300px' });
+
+            $('#jqxDateTimeInput').on('valueChanged', function (event) {
+                $('#Events').jqxPanel('clearcontent');
+                var date = event.args.date;
+                $('#Events').jqxPanel('prepend', '<div style="margin-top: 5px;">New Value: ' + date + '</div>');
+            });
+            $('#jqxDateTimeInput').on('open', function (event) {
+                var date = event.args.date;
+                $('#Events').jqxPanel('prepend', '<div style="margin-top: 5px;">Popup Opened</div>');
+            });
+            $('#jqxDateTimeInput').on('close', function (event) {
+                var date = event.args.date;
+                $('#Events').jqxPanel('prepend', '<div style="margin-top: 5px;">Popup Closed</div>');
+            });
+
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div style='float: left;'>
+            <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput'>
+            </div>
+            <div style='margin-left: 20px; float: left;'>
+                <div>
+                    <span>Events:</span>
+                    <div id='Events'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

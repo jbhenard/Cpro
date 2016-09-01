@@ -1,0 +1,5 @@
+#imglist li 
+{
+    list-style-image: url(images/ok.jpg);
+    font-size:16px;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+
+<head>
+</head>
+
+<body>
+
+    <!-- Code JB HENARD -->
+        <h4 class="blanc" id="h4menu">Vous souhaitez vous inscrire?</h4>
+        <form method="post" id="user-register-form" accept-charset="UTF-8">
+        <div class="form-item form-type-textfield form-item-name">
+        <label for="edit-name" class="blanc">Nom du Candidat<span class="form-required blanc" title="Ce champ est obligatoire.">*</span></label>
+        <input class="username form-text required" type="text" id="edit-name" name="nom" value="" size="60" maxlength="60" />
+        <label for="edit-name" class="blanc">Prenom du Candidat<span class="form-required blanc" title="Ce champ est obligatoire.">*</span></label>
+        <input style="margin-bottom: 2px;" class="username form-text required" type="text" id="edit-name" name="prenom" value="" size="60" maxlength="60" />                                    
+        </div>
+        <div class="form-item form-type-textfield form-item-mail">
+        <label for="edit-mail" class="blanc">Votre mail<span class="form-required blanc" title="Ce champ est obligatoire.">*</span></label>
+        <input style="margin-bottom: 2px;" type="text" id="mail" data-inputmask="'alias': 'email'" name="mail" value="" size="15" maxlength="60" class="form-text required" />                                                            
+        </div>
+        <div class="form-item form-type-password-confirm form-item-pass">
+        <div class="form-item form-type-password form-item-pass-pass1">
+        <label for="edit-pass-pass1" class="blanc">Mot de passe <span class="form-required blanc" title="Ce champ est obligatoire.">*</span></label>
+        <input class="password-field form-text required" type="password" id="edit-pass-pass1" name="mdp1" value="" size="25" maxlength="128" />
+        </div>                                
+        </div>                           
+        <div class="form-actions form-wrapper" id="edit-actions">
+        <input type="submit" id="submitCNC" name="submitCNC" value="Creer un nouveau compte" class="form-submit" />
+        </div>                     
+        </form>                                                                          
+    <!-- Fin code JB HENARD -->     
+
+
+<script src="http://localhost/Racine_Site/javascripts/jquery-1.10.0.min.js"></script>
+<script>
+    var Racine_Site = "http://localhoste/Racine_Site/vue/cpro";
+    $(document).ready(function(){
+      
+
+        createCookie('cookieJBH',"Hello JB", '2');
+        alert ("Cookie JBH active!");
+    });
+
+    function createCookie(name,value,days){
+        var expires;
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime()+(days * 24 * 60 * 60 *1000));
+            expires="; expires="+date.toGMTString();
+        }else{
+            expires="";
+        }
+    document.cookie = escape(name)+"="+escape(value)+expires+"; path=/; domain=http://localhost/Racine_Site/vue/cpro/";
+    }
+    createCookie('cookieJBH0',"Hello JB", '2');
+    alert ("Cookie JBH active!2");
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+﻿constructor()
+{
+    this.settings = {
+        colorScheme: "scheme02",
+        width: 600,
+        height: 600,
+        max: 150,
+        values: [102, 115, 130, 137],
+        tooltip: {
+            visible: true, formatFunction: function (value)
+            {
+                var realVal = parseInt(value);
+                return ('Year: 2016<br />Price Index:' + realVal);
+            }
+        }
+    }
+}

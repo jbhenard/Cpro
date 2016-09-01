@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>With jqxDataTable, you can export your data to Excel, XML, CSV, TSV, JSON, PDF and HTML.</title>
+    
+    <link rel="stylesheet" href="http://cpro.jbh/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+    
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdata.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdata.export.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdatatable.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/scripts/demos.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/demos/jqxgrid/generatedata.js"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var data = generatedata(100);
+
+            var source =
+            {                
+                datatype: "json",
+                dataFields:
+                [
+                    { name: 'Dtc', type: 'string' },
+                    { name: 'Id', type: 'string' },
+                    { name: 'Formation', type: 'string' },
+                    { name: 'Etat', type: 'string' },
+                    { name: 'Dte', type: 'string' }
+                ],
+                url: 'http://cpro.jbh/controleur/cpro/dataCandidats2.php'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            // initialize jqxDataTable
+            $("#dataTable").jqxDataTable(
+            {
+                width: 1000,
+                pageable: true,
+                source: dataAdapter,
+                altRows: true,
+                sortable: true,
+                columns: [
+                 { text: 'Dt Création', columntype: 'datetimeinput', datafield: 'Dtc', width: 150 },
+                  { text: 'Nom Prénom', columntype: 'textbox', datafield: 'Id',  width: 200 },
+                  { text: 'Formation', columntype: 'textbox', datafield: 'Formation', width: 600 },
+                  { text: 'Etat', columntype: 'textbox', datafield: 'Etat',  width: 200 },                 
+                  { text: 'Dt Entretien', columntype: 'datetimeinput', datafield: 'Dte', width: 150 }       
+                ]
+            });
+
+            $("#excelExport").jqxButton();
+            $("#xmlExport").jqxButton();
+            $("#csvExport").jqxButton();
+            $("#tsvExport").jqxButton();
+            $("#htmlExport").jqxButton();
+            $("#jsonExport").jqxButton();
+            $("#pdfExport").jqxButton();
+
+            $("#excelExport").click(function () {
+                $("#dataTable").jqxDataTable('exportData', 'xls');
+            });
+            $("#xmlExport").click(function () {
+                $("#dataTable").jqxDataTable('exportData', 'xml');
+            });
+            $("#csvExport").click(function () {
+                $("#dataTable").jqxDataTable('exportData', 'csv');
+            });
+            $("#tsvExport").click(function () {
+                $("#dataTable").jqxDataTable('exportData', 'tsv');
+            });
+            $("#htmlExport").click(function () {
+                $("#dataTable").jqxDataTable('exportData', 'html');
+            });
+            $("#jsonExport").click(function () {
+                $("#dataTable").jqxDataTable('exportData', 'json');
+            });
+            $("#pdfExport").click(function () {
+                $("#dataTable").jqxDataTable('exportData', 'pdf');
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="dataTable"></div>
+    <div style='margin-top: 20px;'>
+        <div style='float: left;'>
+            <input type="button" value="Export to Excel" id='excelExport' />
+            <br />
+            <br />
+            <input type="button" value="Export to XML" id='xmlExport' />
+        </div>
+        <div style='margin-left: 10px; float: left;'>
+            <input type="button" value="Export to CSV" id='csvExport' />
+            <br />
+            <br />
+            <input type="button" value="Export to TSV" id='tsvExport' />
+        </div>
+        <div style='margin-left: 10px; float: left;'>
+            <input type="button" value="Export to HTML" id='htmlExport' />
+            <br />
+            <br />
+            <input type="button" value="Export to JSON" id='jsonExport' />
+        </div>
+        <div style='margin-left: 10px; float: left;'>
+            <input type="button" value="Export to PDF" id='pdfExport' />
+        </div>
+    </div>
+</body>
+</html>

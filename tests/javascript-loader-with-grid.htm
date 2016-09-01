@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id="Description">This demo shows how to display jqxLoader in jqxGrid.</title>
+    <meta name="keywords" content="jQuery loader, jQWidgets, jqxLoader, loader" />
+    <meta name="description" content="This demo shows how to display jqxLoader in jqxGrid." />
+    
+    <link rel="stylesheet" href="http://cpro.jbh/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+    
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.edit.js"></script>  
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/scripts/demos.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/demos/jqxgrid/generatedata.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxexpander.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdragdrop.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.filter.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/tests/generatedata.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxloader.js"></script>
+	<script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.columnsresize.js"></script>
+        
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxLoader").jqxLoader({  width: 100, height: 60, imagePosition: 'top', autoOpen: true });
+            // prepare the data
+            var source =
+            {
+                datatype: "jsonp",
+                datafields: [
+                    { name: 'countryName', type: 'string' },
+                    { name: 'name', type: 'string' },
+                    { name: 'population', type: 'float' },
+                    { name: 'continentCode', type: 'string' }
+                ],
+                url: "http://api.geonames.org/searchJSON"
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                downloadComplete: function (data, status, xhr) { },
+                loadComplete: function () { $('#jqxLoader').jqxLoader('close'); },
+                loadError: function (xhr, status, error) { },
+                formatData: function (data) {
+                    $.extend(data, {
+                        featureClass: "P",
+                        style: "full",
+                        maxRows: 50,
+                        username: "jqwidgets"
+                    });
+                    return data;
+                }
+            });
+            // initialize jqxGrid
+            $("#jqxGrid").jqxGrid(
+            {
+                width: 850,
+                height: 400,
+                source: dataAdapter,
+                columnsresize: true,
+                showdefaultloadelement: false,
+                autoshowloadelement: false,
+                columns: [
+                    { text: 'Country Name', datafield: 'countryName', width: 200 },
+                    { text: 'City', datafield: 'name', width: 170 },
+                    { text: 'Population', datafield: 'population', cellsformat: 'f', width: 170 },
+                    { text: 'Continent Code', datafield: 'continentCode', minwidth: 110 }
+                ]
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id="jqxLoader">
+    </div>
+    <div id="jqxGrid">
+    </div>
+</body>
+</html>

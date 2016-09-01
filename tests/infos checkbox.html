@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <link rel="stylesheet" href="http://cpro.jbh/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+        
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.edit.js"></script>  
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/scripts/demos.js"></script>
+    
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxexpander.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdragdrop.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxpanel.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcombobox.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.pager.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxwindow.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.filter.js"></script>
+    
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.sort.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxtooltip.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+    
+    <script type="text/javascript">
+        function generatedata(rowscount) {
+            // prepare the data
+            var data = new Array();
+            if (rowscount == undefined) rowscount = 100;
+            var firstNames =
+            [
+                "Andrew", "Nancy", "Shelley", "Regina", "Yoshi", "Antoni", "Mayumi", "Ian", "Peter", "Lars", "Petra", "Martin", "Sven", "Elio", "Beate", "Cheryl", "Michael", "Guylene"
+            ];
+                    var lastNames =
+            [
+                "Fuller", "Davolio", "Burke", "Murphy", "Nagase", "Saavedra", "Ohno", "Devling", "Wilson", "Peterson", "Winkler", "Bein", "Petersen", "Rossi", "Vileid", "Saylor", "Bjorn", "Nodier"
+            ];
+                    var productNames =
+            [
+                "Black Tea", "Green Tea", "Caffe Espresso", "Doubleshot Espresso", "Caffe Latte", "White Chocolate Mocha", "Caramel Latte", "Caffe Americano", "Cappuccino", "Espresso Truffle", "Espresso con Panna", "Peppermint Mocha Twist"
+            ];
+                    var priceValues =
+            [
+                    "2.25", "1.5", "3.0", "3.3", "4.5", "3.6", "3.8", "2.5", "5.0", "1.75", "3.25", "4.0"
+            ];
+            for (var i = 0; i < rowscount; i++) {
+                var row = {};
+                var productindex = Math.floor(Math.random() * productNames.length);
+                var price = parseFloat(priceValues[productindex]);
+                var quantity = 1 + Math.round(Math.random() * 10);
+                row["id"] = i;
+                row["available"] = false;
+                row["firstname"] = firstNames[Math.floor(Math.random() * firstNames.length)];
+                row["lastname"] = lastNames[Math.floor(Math.random() * lastNames.length)];
+                row["productname"] = productNames[productindex];
+                row["price"] = price;
+                row["quantity"] = quantity;
+                row["total"] = price * quantity;
+                var date = new Date();
+                date.setFullYear(2012, Math.floor(Math.random() * 11), Math.floor(Math.random() * 27));
+                date.setHours(0, 0, 0, 0);
+                row["date"] = date;
+                data[i] = row;
+            }
+            return data;
+        }
+        $(document).ready(function () {
+            var theme = 'classic';
+            // prepare the data
+            var data = generatedata(200);
+            var source =
+            {
+                localdata: data,
+                datatype: "array",
+                updaterow: function (rowid, rowdata) {
+                    // synchronize with the server - send update command   
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            // initialize jqxGrid. Disable the built-in selection.
+            $("#jqxgrid").jqxGrid(
+            {
+                source: dataAdapter,
+                editable: true,
+                selectionmode: 'none',
+                columns: [
+                  { text: 'Available', datafield: 'available', columntype: 'checkbox', width: 67 },
+                  { text: 'First Name', editable: false, columntype: 'textbox', datafield: 'firstname', width: 90 },
+                  { text: 'Last Name', editable: false, datafield: 'lastname', columntype: 'textbox', width: 90 },
+                  { text: 'Product', editable: false, datafield: 'productname' }
+                ]
+            });
+            // select or unselect rows when the checkbox is clicked.
+            $("#jqxgrid").bind('cellendedit', function (event) {
+                if (event.args.value) {
+                    $("#jqxgrid").jqxGrid('selectrow', event.args.rowindex);
+                }
+                else {
+                    $("#jqxgrid").jqxGrid('unselectrow', event.args.rowindex);
+                }
+            });
+            // get all selected records.
+            $("#Button").click(function () {
+                var rows = $("#jqxgrid").jqxGrid('selectedrowindexes');
+                var selectedRecords = new Array();
+                for (var m = 0; m < rows.length; m++) {
+                    var row = $("#jqxgrid").jqxGrid('getrowdata', rows[m]);
+                    selectedRecords[m] = row;
+                    alert("datas: "+rows[m]);
+                }
+                
+                for (var m = 0; m < selectedRecords.length; m++) {                    
+                    alert("datas: " + selectedRecords[selectedRecords.length]);
+                    //alert("datas: "+rows[m]);
+                }
+                
+            });
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id="jqxgrid"></div>
+        <input type="button" id="Button" value="Get Selected Rows Data" />
+    </div>
+</body>
+</html>

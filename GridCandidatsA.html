@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title id='Description'>In order to enter in edit mode, select a grid row, then "Click" or press the "F2" key. To cancel the editing, press the "Esc" key. To save
+    the changes press the "Enter" key or select another Grid row.</title>
+    <link rel="stylesheet" href="http://cpro.jbh/jqwidgets/jqwidgets/styles/jqx.base.css" type="text/css" />
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/scripts/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcore.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdata.js"></script> 
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxbuttons.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxscrollbar.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxmenu.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.edit.js"></script>  
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxgrid.selection.js"></script> 
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxlistbox.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdropdownlist.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcheckbox.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxcalendar.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxnumberinput.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/jqxdatetimeinput.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/jqwidgets/globalization/globalize.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/scripts/demos.js"></script>
+    <script type="text/javascript" src="http://cpro.jbh/jqwidgets/demos/jqxgrid/generatedata.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var data = generatedata(200);
+			
+			// prepare the data
+            var source = {                
+                datatype: "json",
+                updaterow: function (rowid, rowdata, commit) {
+                    // synchronize with the server - send update command
+                    // call commit with parameter true if the synchronization with the server is successful 
+                    // and with parameter false if the synchronization failder.
+                    commit(true);
+                },
+                datafields:
+                [
+                    { name: 'Dtc', type: 'string' },
+                    { name: 'Id', type: 'string' },
+                    { name: 'Formation', type: 'string' },
+                    { name: 'Etat', type: 'string' },
+                    { name: 'Dte', type: 'string' }
+                    
+                ],
+                url: 'dataCandidats2A.php'
+            };
+
+            var dataAdapter = new $.jqx.dataAdapter(source);
+
+            // initialize jqxGrid
+            $("#jqxgrid").jqxGrid({
+                width: 900,
+                source: dataAdapter,
+                editable: true,
+                selectionmode: 'singlerow',
+                editmode: 'selectedrow',
+                columns: [
+                  { text: 'Dt Création', columntype: 'datetimeinput', datafield: 'Dtc', width: 150 },
+                  { text: 'Nom Prénom', columntype: 'textbox', datafield: 'Id',  width: 200 },
+                  { text: 'Formation', columntype: 'textbox', datafield: 'Formation', width: 600 },
+                  { text: 'Etat', columntype: 'textbox', datafield: 'Etat',  width: 200 },                 
+                  { text: 'Dt Entretien', columntype: 'datetimeinput', datafield: 'Dte', width: 150 }             
+                ]
+            });
+
+            // events
+           
+        });
+    </script>
+</head>
+<body class='default'>
+    <div id='jqxWidget'>
+        <div id="jqxgrid"></div>
+        <div style="font-size: 12px; font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif; margin-top: 30px;">
+            <div id="cellbegineditevent"></div>
+            <div style="margin-top: 10px;" id="cellendeditevent"></div>
+       </div>
+    </div>
+</body>
+</html>
